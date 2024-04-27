@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flower Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2ecc71;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: #3498db;
+            margin-left: 10px;
+            padding: 5px 10px;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        form {
+            display: inline-block;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        form input[type="text"],
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        form input[type="submit"] {
+            background-color: #2ecc71;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Flower Shop</h1>
+    </header>
+    <div class="container">
+        <h2>Flowers</h2>
+        <ul>
+            {% for flower in flowers %}
+                <li>
+                    <div>
+                        <strong>{{ flower[1] }}</strong> - {{ flower[3] }} USD
+                        <br>{{ flower[2] }}
+                    </div>
+                    <div>
+                        <a href="/edit/{{ flower[0] }}">Edit</a>
+                        <form method="post" action="/delete/{{ flower[0] }}">
+                            <input type="submit" value="Delete">
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <h2>Add a New Flower</h2>
+        <form method="post" action="/add">
+            <label for="name">Name:</label>
+            <input type="text" name="name" required><br>
+            <label for="description">Description:</label>
+            <textarea name="description"></textarea><br>
+            <label for="price">Price:</label>
+            <input type="text" name="price" required><br>
+            <input type="submit" value="Add Flower">
+        </form>
+    </div>
+</body>
+</html>
